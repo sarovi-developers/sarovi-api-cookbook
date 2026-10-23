@@ -1,68 +1,72 @@
-# Sarovi API cookbook
+# نمونه‌کدهای API ساروی
 
-Runnable examples for your first AI response, streaming text, structured JSON, and function tools. JavaScript and Python; no package install required.
+از اولین پاسخ تا متن زنده، خروجی JSON و فراخوانی ابزار؛ با JavaScript و Python، بدون نصب کتابخانهٔ اضافی.
 
-[فارسی](README.fa.md) · [Create a key](https://api.sarovi.site/developers/start?utm_source=github&utm_medium=organic&utm_campaign=developer_tools_202610&utm_content=sarovi-api-cookbook_key) · [Models & pricing](https://api.sarovi.site/developers/pricing?utm_source=github&utm_medium=organic&utm_campaign=developer_tools_202610&utm_content=sarovi-api-cookbook_pricing)
+[ساخت کلید API](https://api.sarovi.site/developers/start?utm_source=github&utm_medium=organic&utm_campaign=developer_tools_202610&utm_content=sarovi-api-cookbook_key_fa) · [مدل‌ها و قیمت‌ها](https://api.sarovi.site/developers/pricing?utm_source=github&utm_medium=organic&utm_campaign=developer_tools_202610&utm_content=sarovi-api-cookbook_pricing_fa) · [اولین درخواست](https://api.sarovi.site/developers/start?utm_source=github&utm_medium=organic&utm_campaign=developer_tools_202610&utm_content=sarovi-api-cookbook_first_request_fa)
 
-## Try it in 30 seconds
+## اول بدون هزینه امتحان کنید
 
-Requires Node.js 24+ or Python 3.10+.
+Node.js نسخهٔ ۲۴ به بالا یا Python نسخهٔ ۳٫۱۰ به بالا لازم است.
 
 ```sh
 git clone https://github.com/sarovi-developers/sarovi-api-cookbook.git
 cd sarovi-api-cookbook
 node examples.mjs hello --demo
-# Or:
+# یا با پایتون:
 python3 example.py hello --demo
 ```
 
-The demo is offline. To call a model, create a Sarovi key, then:
+حالت `--demo` فقط نمونهٔ محلی است؛ به مدل درخواست نمی‌فرستد و اعتبار مصرف نمی‌کند.
+
+## اولین درخواست واقعی
+
+در کنسول ساروی کلید پروژه بسازید و سقف مصرف کوچکی تعیین کنید. برای ارسال پیام، دسترسی `responses:write` و برای فهرست مدل‌ها `models:read` لازم است.
 
 ```sh
 cp .env.example .env
-# Edit .env: set your private SAROVI_API_KEY.
+# کلید خصوصی خودتان را در .env بگذارید.
 node --env-file=.env examples.mjs hello
 ```
 
-Python reads environment variables:
+نمونهٔ پایتون متغیرهای محیط را می‌خواند:
 
 ```sh
 export SAROVI_API_KEY="YOUR_SAROVI_API_KEY"
 python3 example.py hello
 ```
 
-In PowerShell, use `$env:SAROVI_API_KEY="YOUR_SAROVI_API_KEY"`. Set a small key budget in the console before a real run.
+در PowerShell از `$env:SAROVI_API_KEY="YOUR_SAROVI_API_KEY"` استفاده کنید. کلید را در مرورگر، تصویر صفحه یا مخزن عمومی نگذارید.
 
-## Recipes
+## نمونه‌ها
 
-| Task | Command |
+| کار | دستور |
 | --- | --- |
-| Discover available models | `node --env-file=.env examples.mjs models` |
-| First response | `node --env-file=.env examples.mjs hello` |
-| Stream text to your terminal | `node --env-file=.env examples.mjs stream` |
-| Return a validated task-plan object | `node --env-file=.env examples.mjs structured` |
-| Let the model call a safe local addition function | `node --env-file=.env examples.mjs tools` |
-| Recover billing metadata after an uncertain response | `node --env-file=.env examples.mjs receipt --idempotency-key=ORIGINAL_KEY` |
+| فهرست مدل‌ها | `node --env-file=.env examples.mjs models` |
+| اولین پاسخ | `node --env-file=.env examples.mjs hello` |
+| پاسخ زنده در ترمینال | `node --env-file=.env examples.mjs stream` |
+| برنامهٔ کار با خروجی JSON اعتبارسنجی‌شده | `node --env-file=.env examples.mjs structured` |
+| فراخوانی تابع جمع محلی | `node --env-file=.env examples.mjs tools` |
+| پیگیری مصرف یک درخواست نامعلوم | `node --env-file=.env examples.mjs receipt --idempotency-key=ORIGINAL_KEY` |
 
-Add `--demo` to generation recipes for offline fixtures. Tool calling uses two separate requests. Structured output and tools require a model that supports those features. Change `SAROVI_MODEL` to a current model ID; omitted reasoning settings keep the provider default.
+به نمونه‌های تولید پاسخ، `--demo` اضافه کنید تا آفلاین اجرا شوند. نمونهٔ ابزار دو درخواست جدا مصرف می‌کند. خروجی ساختاریافته و ابزارها به مدل مناسب نیاز دارند؛ مدل را با `SAROVI_MODEL` انتخاب کنید و قابلیت و قیمت فعلی را در کنسول ببینید. محدودیت توکن، سقف پولی نیست. پیگیری مصرف به دسترسی `usage:read` نیاز دارد.
 
-## Build something
+اگر پاسخ قطع شود، درخواست پولی خودکار تکرار نمی‌شود. کلید اصلی و شناسهٔ درخواست را نگه دارید و قبل از ارسال مجدد، مصرف همان عملیات را بررسی کنید.
 
-- [Streaming chat app](https://github.com/sarovi-developers/sarovi-ai-chat-starter)
-- [CSV translation and classification](https://github.com/sarovi-developers/sarovi-batch-tools)
-- [Connect Continue](docs/continue.md)
-- [cURL first request](docs/curl.md)
-- [API behavior, costs, privacy, and validation limits](docs/API-NOTES.md)
+## چیزی بسازید
 
-## Checks
+- [چت آماده با پاسخ زنده](https://github.com/sarovi-developers/sarovi-ai-chat-starter)
+- [ترجمه و دسته‌بندی فایل CSV](https://github.com/sarovi-developers/sarovi-batch-tools)
+- [اتصال به Continue](docs/continue.md)
+- [اولین درخواست با cURL](docs/curl.md)
+- [رفتار API، هزینه و حریم خصوصی](docs/API-NOTES.md)
+
+## بررسی کد
 
 ```sh
 node --test test/*.test.mjs
 python3 -m py_compile example.py sarovi_http.py
 ```
 
-Tests are offline: split Persian UTF-8 streams, early EOF, provider errors, redirect refusal, and one-send behavior. Live provider generation has not been exercised by these tests.
+آزمون‌ها آفلاین‌اند: متن فارسی تکه‌تکه، پایان ناقص پاسخ زنده، خطای ارائه‌دهنده، جلوگیری از تغییر مسیر و ارسال یک‌بارهٔ درخواست را بررسی می‌کنند. همهٔ مدل‌های زنده با این آزمون‌ها تأیید نشده‌اند.
 
-[Complete your first API request](https://api.sarovi.site/developers/start?utm_source=github&utm_medium=organic&utm_campaign=developer_tools_202610&utm_content=sarovi-api-cookbook_first_request). Check the settled request in your Sarovi console.
-
-MIT-licensed example code. Sarovi API usage is billed separately.
+کد با مجوز [MIT](LICENSE.fa.md) منتشر شده است؛ مصرف API جداگانه محاسبه می‌شود. نتیجهٔ درخواست واقعی و مصرف نهایی را در کنسول ساروی ببینید.

@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Small, runnable Sarovi API recipes in JavaScript and Python.",
-  "scripts": {"test": "node --test test/*.test.mjs", "demo": "node examples.mjs hello --demo"},
-  "engines": {"node": ">=24"},
+  "description": "نمونه‌کدهای کاربردی API ساروی با پایتون و جاوااسکریپت؛ پاسخ زنده، خروجی ساختاریافته و ابزارها.",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "demo": "node examples.mjs hello --demo"
+  },
+  "engines": {
+    "node": ">=24"
+  },
   "license": "MIT"
 }
